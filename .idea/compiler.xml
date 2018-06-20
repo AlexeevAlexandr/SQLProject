@@ -9,5 +9,8 @@
         <module name="SQLProject" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SQLProject" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

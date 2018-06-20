@@ -1,42 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="postgres@localhost">
-  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.9">
-    <root id="1">
-      <ServerVersion>10.4</ServerVersion>
-    </root>
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.7">
+    <root id="1"/>
     <database id="2" parent="1" name="postgres">
-      <ObjectId>12938</ObjectId>
-      <Comment>default administrative connection database</Comment>
-      <IntrospectionStateNumber>116</IntrospectionStateNumber>
+      <ObjectId>12401</ObjectId>
       <Current>1</Current>
       <Visible>1</Visible>
     </database>
-    <role id="3" parent="1" name="pg_monitor">
-      <ObjectId>3373</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
-    </role>
-    <role id="4" parent="1" name="pg_read_all_settings">
-      <ObjectId>3374</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
-    </role>
-    <role id="5" parent="1" name="pg_read_all_stats">
-      <ObjectId>3375</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
-    </role>
-    <role id="6" parent="1" name="pg_signal_backend">
+    <role id="3" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
       <Inherit>1</Inherit>
       <ConnectionLimit>-1</ConnectionLimit>
     </role>
-    <role id="7" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
-    </role>
-    <role id="8" parent="1" name="postgres">
+    <role id="4" parent="1" name="root">
       <ObjectId>10</ObjectId>
       <SuperRole>1</SuperRole>
       <Inherit>1</Inherit>
@@ -47,115 +23,76 @@
       <ConnectionLimit>-1</ConnectionLimit>
       <BypassRls>1</BypassRls>
     </role>
-    <schema id="9" parent="2" name="information_schema">
-      <ObjectId>12648</ObjectId>
-    </schema>
-    <schema id="10" parent="2" name="pg_catalog">
-      <ObjectId>11</ObjectId>
-      <Comment>system catalog schema</Comment>
-    </schema>
-    <schema id="11" parent="2" name="pg_temp_1">
-      <ObjectId>11736</ObjectId>
-    </schema>
-    <schema id="12" parent="2" name="pg_toast">
-      <ObjectId>99</ObjectId>
-      <Comment>reserved schema for TOAST tables</Comment>
-    </schema>
-    <schema id="13" parent="2" name="pg_toast_temp_1">
-      <ObjectId>11737</ObjectId>
-    </schema>
-    <schema id="14" parent="2" name="public">
+    <schema id="5" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <Comment>standard public schema</Comment>
-      <IntrospectionTimestamp>2018-06-20.13:25:15.276</IntrospectionTimestamp>
-      <IntrospectionStateNumber>561</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-06-20.23:38:04.203</IntrospectionTimestamp>
+      <IntrospectionStateNumber>623</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
-    <access-method id="15" parent="2" name="btree">
-      <ObjectId>403</ObjectId>
-      <Comment>b-tree index access method</Comment>
-      <Handler>pg_catalog.bthandler</Handler>
-      <HandlerId>330</HandlerId>
-      <Type>index</Type>
-    </access-method>
-    <access-method id="16" parent="2" name="hash">
-      <ObjectId>405</ObjectId>
-      <Comment>hash index access method</Comment>
-      <Handler>pg_catalog.hashhandler</Handler>
-      <HandlerId>331</HandlerId>
-      <Type>index</Type>
-    </access-method>
-    <access-method id="17" parent="2" name="gist">
-      <ObjectId>783</ObjectId>
-      <Comment>GiST index access method</Comment>
-      <Handler>pg_catalog.gisthandler</Handler>
-      <HandlerId>332</HandlerId>
-      <Type>index</Type>
-    </access-method>
-    <access-method id="18" parent="2" name="gin">
-      <ObjectId>2742</ObjectId>
-      <Comment>GIN index access method</Comment>
-      <Handler>pg_catalog.ginhandler</Handler>
-      <HandlerId>333</HandlerId>
-      <Type>index</Type>
-    </access-method>
-    <access-method id="19" parent="2" name="spgist">
-      <ObjectId>4000</ObjectId>
-      <Comment>SP-GiST index access method</Comment>
-      <Handler>pg_catalog.spghandler</Handler>
-      <HandlerId>334</HandlerId>
-      <Type>index</Type>
-    </access-method>
-    <access-method id="20" parent="2" name="brin">
-      <ObjectId>3580</ObjectId>
-      <Comment>block range index (BRIN) access method</Comment>
-      <Handler>pg_catalog.brinhandler</Handler>
-      <HandlerId>335</HandlerId>
-      <Type>index</Type>
-    </access-method>
-    <sequence id="21" parent="14" name="demo_id_seq">
-      <ObjectId>16396</ObjectId>
-      <StateNumber>558</StateNumber>
-      <SequenceIdentity>1..2147483647</SequenceIdentity>
+    <schema id="6" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="7" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="pg_temp_1">
+      <ObjectId>11848</ObjectId>
+    </schema>
+    <schema id="9" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11849</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="information_schema">
+      <ObjectId>12113</ObjectId>
+    </schema>
+    <sequence id="11" parent="5" name="user_id_seq">
+      <ObjectId>16420</ObjectId>
+      <StateNumber>573</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
     </sequence>
-    <table id="22" parent="14" name="demo">
-      <ObjectId>16393</ObjectId>
-      <StateNumber>561</StateNumber>
+    <table id="12" parent="5" name="user">
+      <ObjectId>16394</ObjectId>
+      <StateNumber>589</StateNumber>
     </table>
-    <column id="23" parent="22" name="id">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
+    <column id="13" parent="12" name="id">
+      <Position>5</Position>
+      <DataType>numeric|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>558</StateNumber>
-      <DefaultExpression>nextval(&apos;demo_id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-      <SequenceName>demo_id_seq</SequenceName>
+      <StateNumber>589</StateNumber>
+      <DefaultExpression>nextval(&apos;user_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>1700</TypeId>
+      <SequenceName>user_id_seq</SequenceName>
     </column>
-    <column id="24" parent="22" name="name">
-      <Position>2</Position>
-      <DataType>text|0s</DataType>
+    <column id="14" parent="12" name="name">
+      <Position>6</Position>
+      <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>561</StateNumber>
-      <TypeId>25</TypeId>
+      <StateNumber>581</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
-    <index id="25" parent="22" name="demo_id_pk">
-      <ObjectId>16403</ObjectId>
+    <column id="15" parent="12" name="password">
+      <Position>7</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>623</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="16" parent="12" name="user_id_pk">
+      <ObjectId>16433</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="26" parent="22" name="demo_id_uindex">
-      <ObjectId>16402</ObjectId>
+    <index id="17" parent="12" name="user_id_uindex">
+      <ObjectId>16435</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="27" parent="22" name="demo_id_pk">
-      <ObjectId>16404</ObjectId>
+    <key id="18" parent="12" name="user_id_pk">
+      <ObjectId>16434</ObjectId>
       <ColNames>id</ColNames>
-      <UnderlyingIndexName>demo_id_pk</UnderlyingIndexName>
+      <UnderlyingIndexName>user_id_pk</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
   </database-model>
