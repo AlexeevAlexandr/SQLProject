@@ -67,8 +67,8 @@
     <schema id="14" parent="2" name="public">
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
-      <IntrospectionTimestamp>2018-06-21.10:43:28.892</IntrospectionTimestamp>
-      <IntrospectionStateNumber>583</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-06-21.17:31:31.623</IntrospectionTimestamp>
+      <IntrospectionStateNumber>704</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -147,5 +147,21 @@
       <StateNumber>573</StateNumber>
       <TypeId>1043</TypeId>
     </column>
+    <index id="26" parent="22" name="user_id_pk">
+      <ObjectId>24581</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="27" parent="22" name="user_id_uindex">
+      <ObjectId>24580</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="28" parent="22" name="user_id_pk">
+      <ObjectId>24582</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>user_id_pk</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

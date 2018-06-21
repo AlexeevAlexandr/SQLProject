@@ -2,9 +2,13 @@ import java.sql.*;
 import java.util.Random;
 
 public class DatabaseManager {
-    private static Connection getConnection(String user, String password, String database) throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+database, user, password);
+    private static Connection getConnection(String user, String password, String database) {
+        try {
+            Class.forName("org.postgresql.Driver");
+        }catch (ClassNotFoundException e){e.printStackTrace();}
+        try {
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+database, user, password);
+        }catch (SQLException e){e.printStackTrace(); return null;}
     }
         public static void main(String[] argv) throws ClassNotFoundException, SQLException {
             String user = "postgres";
@@ -19,11 +23,11 @@ public class DatabaseManager {
 
             //SELECT
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM postgres");
-            while (rs.next()) {
-                System.out.print(rs);
-
+            ResultSet rs = stmt.executeQuery("select table_name from information_schema.tables where table_schema='public'");
+            while(rs.next()) {
+                System.out.println(rs.getString("table_name"));
             }
+
             rs.close();
             stmt.close();
 
