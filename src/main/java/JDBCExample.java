@@ -5,12 +5,12 @@ public class JDBCExample {
     public static void main(String[] argv) throws ClassNotFoundException, SQLException{
         Class.forName("org.postgresql.Driver");
         Connection connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/postgres", "root",
+                    "jdbc:postgresql://localhost:5432/postgres", "postgres",
                     "111111");
 
         //INSERT
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("INSERT INTO public.user (name, password)  VALUES ('STIVEN', '123456')");
+        stmt.executeUpdate("INSERT INTO public.user (name, password)  VALUES ('STIVEN', '0123456789')");
 
         //SELECT
         stmt = connection.createStatement();
@@ -29,7 +29,7 @@ public class JDBCExample {
         stmt.close();
 
         //UPDATE
-        PreparedStatement ps = connection.prepareStatement("UPDATE public.user SET password = ? WHERE id > 20");
+        PreparedStatement ps = connection.prepareStatement("UPDATE public.user SET password = ? WHERE id > 6");
         ps.setString(1, String.valueOf(new Random().nextInt()));
         ps.executeUpdate();
         ps.close();
