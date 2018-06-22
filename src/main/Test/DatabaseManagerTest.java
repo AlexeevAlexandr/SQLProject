@@ -8,7 +8,7 @@ public class DatabaseManagerTest {
         @Before
         public void setup (){
             manager = new DatabaseManager();
-            manager.connect("root", "111111", "postgres");
+            manager.connect("postgres", "111111", "postgres");
         }
         @Test
         public void testGetAllTableNames(){
@@ -16,10 +16,14 @@ public class DatabaseManagerTest {
             assertEquals("[user]", Arrays.toString(tableNames));
         }
         @Test
-    public void testGetTableData(){
-        manager.clear("user");
-            DataSet [] users = manager.getTableData("users");
-            assertEquals(1, users.length);
+        public void clearData() {
+            manager.clear("user");
+            DataSet[] users = manager.getTableData("user");
+            assertEquals(0, users.length);
+        }
+        @Test
+        public void testGetTableData(){
+            manager.clear("user");
 
             DataSet input = new DataSet();
             input.put("id", 1);
@@ -27,8 +31,32 @@ public class DatabaseManagerTest {
             input.put("password", "pass");
             manager.create(input);
 
+            DataSet[] users = manager.getTableData("user");
             DataSet user = users [0];
-            assertEquals("[id, name, password", user.getNames());
-            assertEquals("[id, name, password", user.getValues());
+            assertEquals("[id, name, password]", Arrays.toString(user.getNames()));
+            assertEquals("[1, Stiven, pass]", Arrays.toString(user.getValues()));
+
+        }
+        @Test
+        public void testUpdateTableData(){
+            manager.clear("user");
+
+            DataSet input = new DataSet();
+            input.put("id", 11);
+            input.put("name", "Stiven");
+            input.put("password", "pass");
+            manager.create(input);
+
+            DataSet newValue = new DataSet();
+            newValue.put("password", "pass2");
+            manager.update(11, newValue);
+
+            DataSet[] users = manager.getTableData("user");
+            assertEquals(1, users.length);
+
+            DataSet user = users [0];
+            assertEquals("[id, name, password]", Arrays.toString(user.getNames()));
+            assertEquals("[1, Stiven, pass]", Arrays.toString(user.getValues()));
+
         }
     }
