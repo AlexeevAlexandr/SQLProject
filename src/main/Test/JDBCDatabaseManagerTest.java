@@ -1,12 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.SQLException;
 import java.util.Arrays;
 import static junit.framework.TestCase.assertEquals;
 
 public class JDBCDatabaseManagerTest {
     protected DatabaseManager manager;
         @Before
-        public void setup (){
+        public void setup () throws SQLException {
             manager = new JDBCDatabaseManager();
             manager.connect("root", "111111", "postgres");
         }

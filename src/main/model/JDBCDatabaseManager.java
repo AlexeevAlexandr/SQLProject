@@ -5,20 +5,17 @@ public class JDBCDatabaseManager implements DatabaseManager {
     private Connection connection;
 
     @Override
-    public void connect(String user, String password, String database) {
+    public void connect(String user, String password, String database) throws SQLException{
         try { //check driver
             Class.forName("org.postgresql.Driver");
         }catch(ClassNotFoundException e){
             System.out.println("Couldn't find the JDBC driver");
             e.printStackTrace();}
 
-        try { //check connection
+         //connection
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"
                     +database, user, password);
-        }catch (SQLException e){
-            System.out.println("Can't connect to database");
-            e.printStackTrace();
-            connection = null;}
+
     }
 
     @Override

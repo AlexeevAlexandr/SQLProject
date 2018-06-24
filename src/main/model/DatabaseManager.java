@@ -1,7 +1,8 @@
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public interface DatabaseManager {
-    void connect(String user, String password, String database);
+    void connect(String user, String password, String database) throws SQLException;
 
     Connection getConnection();
 

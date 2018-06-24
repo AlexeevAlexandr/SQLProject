@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] argv){
+    public static void main(String[] argv) throws SQLException {
         String user = "root";
         String password = "111111";
         String database = "postgres";
