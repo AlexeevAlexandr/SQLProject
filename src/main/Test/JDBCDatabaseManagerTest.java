@@ -6,7 +6,7 @@ import java.util.Arrays;
 import static junit.framework.TestCase.assertEquals;
 
 public class JDBCDatabaseManagerTest {
-    protected DatabaseManager manager;
+    DatabaseManager manager;
         @Before
         public void setup () throws SQLException {
             manager = new JDBCDatabaseManager();
@@ -64,7 +64,6 @@ public class JDBCDatabaseManagerTest {
     }
         @Test
         public void testGetColumnNames() {
-
         manager.clear("user");
         String[] columnNames = manager.getTableColumns("user");
         assertEquals("[id, name, password]", Arrays.toString(columnNames));
