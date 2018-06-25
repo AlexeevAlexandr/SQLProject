@@ -18,6 +18,9 @@ public class MainController {
             try {
             String string = view.read();
             String[] data = string.split("[,]");
+            if(data.length != 3){
+                throw new IllegalArgumentException("\nNot correct entered number of parameters");
+            }
             String userName = data[0];
             String password = data[1];
             String databaseName = data[2];
@@ -25,10 +28,14 @@ public class MainController {
             manager.connect(userName, password, databaseName);
                     break;
             } catch (Exception e) {
-                String message = (e.getCause() != null) ? e.getMessage() + " " + e.getCause().getMessage() : e.getMessage();
-                view.write("Connect isn't successful: " + message + "\n" + "Try again.");
+                printError(e);
             }
         }
         view.write("Connect is successful");
+    }
+
+    private void printError(Exception e) {
+        String message = (e.getCause() != null) ? e.getMessage() + " " + e.getCause().getMessage() : e.getMessage();
+        view.write("Connect isn't successful:\n" + message + "\n" + "Try again.");
     }
 }
