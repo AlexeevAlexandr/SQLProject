@@ -1,8 +1,16 @@
 public class MainController {
-    public static void main(String[] args) {
-        View view = new Console();
-        DatabaseManager manager = new JDBCDatabaseManager();
+     private DatabaseManager manager;
+    private View view;
+    MainController(View view, DatabaseManager manager){
+        this.view = view;
+        this.manager = manager;
+    }
 
+    public void run(){
+        connectToDB();
+    }
+
+    public void connectToDB() {
         view.write("Hi user!");
         while (true) {
             view.write("Enter please username, password and databaseName.\n" +

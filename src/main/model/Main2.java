@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.Arrays;
 
-public class Main {
+public class Main2 {
     public static void main(String[] argv) throws SQLException {
         String user = "root";
         String password = "111111";
