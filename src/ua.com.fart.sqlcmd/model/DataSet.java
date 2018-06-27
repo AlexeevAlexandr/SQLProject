@@ -20,7 +20,9 @@ public class DataSet {
             this.value = value;
         }
     }
+
     private Data [] data = new Data[100]; //TODO remove magic number 100
+
     private int freeIndex = 0;
 
     public void put(String name, Object value) {
@@ -40,6 +42,7 @@ public class DataSet {
         }
         return result;
     }
+
     public String [] getNames(){
         String [] result = new String[freeIndex];
         for (int i = 0; i < freeIndex; i++) {

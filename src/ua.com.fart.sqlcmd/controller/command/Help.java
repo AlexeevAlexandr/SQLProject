@@ -17,13 +17,11 @@ public class Help implements Command{
 
     @Override
     public void proces(String command) {
-        view.write("Available commands:\t");
+        view.write("Available commands:");
         view.write("---------------------");
-        view.write("list: \n \t for getting list of tables from base, what you did connect.\n");
-        view.write("find,tableName: \n \t " +
-                "for getting contents of your table, type 'find,tableName'. " +
-                "tableName it's name of table, what you looking for. \n");
-        view.write("exit: \n \t for exit.");
+        view.write("list: for getting list of tables from base, what you did connect.\n");
+        view.write("find,tableName: for getting contents of your table, type 'find,tableName'. tableName it's name of table, what you looking for. \n");
+        view.write("exit: for exit.");
         view.write("---------------------");
     }
 }

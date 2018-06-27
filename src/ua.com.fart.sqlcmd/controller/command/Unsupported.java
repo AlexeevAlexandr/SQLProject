@@ -2,22 +2,20 @@ package ua.com.fart.sqlcmd.controller.command;
 
 import ua.com.fart.sqlcmd.view.View;
 
-public class Exit implements Command {
-
+public class Unsupported implements Command {
     private View view;
 
-    public Exit (View view){
+    public Unsupported(View view) {
         this.view = view;
     }
 
     @Override
     public boolean canProces(String command) {
-        return command.equals("exit");
+        return true;
     }
 
     @Override
     public void proces(String command) {
-        view.write("Good by, see you soon.");
-        System.exit(0);
+        view.write("Incorrect command: '" + command + "' try again");
     }
 }
