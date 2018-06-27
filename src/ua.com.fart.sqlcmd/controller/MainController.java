@@ -3,11 +3,10 @@ package ua.com.fart.sqlcmd.controller;
 import ua.com.fart.sqlcmd.controller.command.Command;
 import ua.com.fart.sqlcmd.controller.command.Exit;
 import ua.com.fart.sqlcmd.controller.command.Help;
+import ua.com.fart.sqlcmd.controller.command.List;
 import ua.com.fart.sqlcmd.model.DataSet;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
-
-import java.util.Arrays;
 
 public class MainController {
     private Command[] commands;
@@ -16,7 +15,7 @@ public class MainController {
     MainController(View view, DatabaseManager manager){
         this.view = view;
         this.manager = manager;
-        this.commands = new Command[] {new Exit(view), new Help(view)};
+        this.commands = new Command[] {new Exit(view), new Help(view), new List(manager, view)};
     }
 
     public void run(){
@@ -27,8 +26,8 @@ public class MainController {
                 String command = view.read();
                 if (command.startsWith("find")) {
                     doFind(command);
-                } else if (command.equals("list")) {
-                    doList();
+                } else if (commands[2].canProces(command)) {//list
+                    commands[2].proces(command);
                 } else if (commands[1].canProces(command)) {//help
                     commands[1].proces(command);
                 } else if (commands[0].canProces(command)) {//exit
@@ -73,12 +72,6 @@ public class MainController {
         view.write("------------------");
         view.write(result);
         view.write("------------------");
-    }
-
-    private void doList() {
-        String [] tebleNames = manager.getTableNames();
-        String message = Arrays.toString(tebleNames);
-        view.write(message);
     }
 
     private void connectToDB() {

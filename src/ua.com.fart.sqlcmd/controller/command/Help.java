@@ -1,16 +1,13 @@
 package ua.com.fart.sqlcmd.controller.command;
 
-import ua.com.fart.sqlcmd.controller.MainController;
 import ua.com.fart.sqlcmd.view.View;
 
 public class Help implements Command{
 
     private View view;
-    private MainController controller;
 
     public Help(View view){
         this.view = view;
-        this.controller = controller;
     }
 
     @Override
