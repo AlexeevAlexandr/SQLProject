@@ -1,3 +1,5 @@
+package ua.com.fart.sqlcmd.view;
+
 import java.util.Scanner;
 
 public class Console implements View {

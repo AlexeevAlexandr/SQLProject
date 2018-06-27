@@ -1,3 +1,5 @@
+package ua.com.fart.sqlcmd.model;
+
 import java.sql.*;
 import java.util.Random;
 

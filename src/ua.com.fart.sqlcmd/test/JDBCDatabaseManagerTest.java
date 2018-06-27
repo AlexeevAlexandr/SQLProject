@@ -1,8 +1,13 @@
+package ua.com.fart.sqlcmd.test;
+
 import org.junit.Before;
 import org.junit.Test;
-
+import ua.com.fart.sqlcmd.model.DataSet;
+import ua.com.fart.sqlcmd.model.DatabaseManager;
+import ua.com.fart.sqlcmd.model.JDBCDatabaseManager;
 import java.sql.SQLException;
 import java.util.Arrays;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class JDBCDatabaseManagerTest {

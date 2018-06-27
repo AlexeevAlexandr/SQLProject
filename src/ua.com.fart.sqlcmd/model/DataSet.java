@@ -1,3 +1,5 @@
+package ua.com.fart.sqlcmd.model;
+
 import java.util.Arrays;
 
 public class DataSet {
@@ -21,7 +23,7 @@ public class DataSet {
     private Data [] data = new Data[100]; //TODO remove magic number 100
     private int freeIndex = 0;
 
-    void put(String name, Object value) {
+    public void put(String name, Object value) {
         for (int index = 0; index < freeIndex; index++) {
             if(data[index].getName().equals(name)){
                 data[index].value = value;
@@ -31,14 +33,14 @@ public class DataSet {
         data[freeIndex++] = new Data (name, value);
     }
 
-    Object [] getValues(){
+    public Object [] getValues(){
         Object [] result = new Object[freeIndex];
         for (int i = 0; i < freeIndex; i++) {
             result [i] = data[i].getValue();
         }
         return result;
     }
-    String [] getNames(){
+    public String [] getNames(){
         String [] result = new String[freeIndex];
         for (int i = 0; i < freeIndex; i++) {
             result [i] = data[i].getName();

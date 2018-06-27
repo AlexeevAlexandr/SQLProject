@@ -1,3 +1,5 @@
+package ua.com.fart.sqlcmd.model;
+
 import java.sql.*;
 import java.util.*;
 
@@ -73,7 +75,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     @Override
     public int getSize(String tableName){
-        try {
+        try{
             Statement stmt = connection.createStatement();
             ResultSet rsCount = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName);
             rsCount.next();

@@ -1,11 +1,21 @@
+package ua.com.fart.sqlcmd.controller;
+
+import ua.com.fart.sqlcmd.controller.command.Command;
+import ua.com.fart.sqlcmd.controller.command.Exit;
+import ua.com.fart.sqlcmd.model.DataSet;
+import ua.com.fart.sqlcmd.model.DatabaseManager;
+import ua.com.fart.sqlcmd.view.View;
+
 import java.util.Arrays;
 
 public class MainController {
-     private DatabaseManager manager;
+    private Command[] commands;
+    private DatabaseManager manager;
     private View view;
     MainController(View view, DatabaseManager manager){
         this.view = view;
         this.manager = manager;
+        this.commands = new Command[] {new Exit(view)};
     }
 
     public void run(){
@@ -16,28 +26,27 @@ public class MainController {
                 String command = view.read();
                 if (command.startsWith("find")) {
                     doFind(command);
-                } else if (command.startsWith("list")) {
+                } else if (command.equals("list")) {
                     doList();
-                } else if (command.startsWith("help")) {
+                } else if (command.equals("help")) {
                     doHelp();
-                } else if (command.startsWith("exit")) {
-                    view.write("Good by, see soon.");
-                    break;
+                } else if (commands[0].canProces(command)) {
+                    commands[0].proces(command);
                 } else {
                     view.write("Incorrect command: '" + command + "' try again");
                 }
-            }catch(Exception e){view.write("Incorrect command, try again");}
+            } catch(Exception e){view.write("Incorrect command, try again");}
         }
     }
 
     private void doFind(String command) {
-        String [] data = command.split("[,]");
-        String tableName = data[1];
+            String[] data = command.split("[,]");
+            String tableName = data[1];
 
-        DataSet[] tableData = manager.getTableData(tableName);
-        String [] tableColumns = manager.getTableColumns(tableName);
-        printHeader(tableColumns);
-        printTable(tableData);
+            DataSet[] tableData = manager.getTableData(tableName);
+            String[] tableColumns = manager.getTableColumns(tableName);
+            printHeader(tableColumns);
+            printTable(tableData);
     }
 
     private void printTable(DataSet[] tableData) {
