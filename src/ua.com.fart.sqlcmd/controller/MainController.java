@@ -2,6 +2,7 @@ package ua.com.fart.sqlcmd.controller;
 
 import ua.com.fart.sqlcmd.controller.command.Command;
 import ua.com.fart.sqlcmd.controller.command.Exit;
+import ua.com.fart.sqlcmd.controller.command.Help;
 import ua.com.fart.sqlcmd.model.DataSet;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
@@ -15,7 +16,7 @@ public class MainController {
     MainController(View view, DatabaseManager manager){
         this.view = view;
         this.manager = manager;
-        this.commands = new Command[] {new Exit(view)};
+        this.commands = new Command[] {new Exit(view), new Help(view)};
     }
 
     public void run(){
@@ -28,9 +29,9 @@ public class MainController {
                     doFind(command);
                 } else if (command.equals("list")) {
                     doList();
-                } else if (command.equals("help")) {
-                    doHelp();
-                } else if (commands[0].canProces(command)) {
+                } else if (commands[1].canProces(command)) {//help
+                    commands[1].proces(command);
+                } else if (commands[0].canProces(command)) {//exit
                     commands[0].proces(command);
                 } else {
                     view.write("Incorrect command: '" + command + "' try again");
@@ -72,17 +73,6 @@ public class MainController {
         view.write("------------------");
         view.write(result);
         view.write("------------------");
-    }
-
-    private void doHelp() {
-        view.write("Available commands:\t");
-        view.write("---------------------");
-        view.write("list: \n \t for getting list of tables from base, what you did connect.\n");
-        view.write("find,tableName: \n \t " +
-                "for getting contents of your table, type 'find,tableName'. " +
-                "tableName it's name of table, what you looking for. \n");
-        view.write("exit: \n \t for exit.");
-        view.write("---------------------");
     }
 
     private void doList() {
