@@ -11,7 +11,7 @@ public class List implements Command {
     private View view;
 
 
-    public List(DatabaseManager manager, View view){
+    public List(View view, DatabaseManager manager){
         this.manager = manager;
         this.view = view;
     }
@@ -24,6 +24,6 @@ public class List implements Command {
     public void proces(String command) {
         String [] tebleNames = manager.getTableNames();
         String message = Arrays.toString(tebleNames);
-        view.write(message);
+        view.write(message+"\n");
     }
 }

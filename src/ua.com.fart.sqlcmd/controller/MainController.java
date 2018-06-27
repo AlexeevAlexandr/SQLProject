@@ -2,9 +2,9 @@ package ua.com.fart.sqlcmd.controller;
 
 import ua.com.fart.sqlcmd.controller.command.Command;
 import ua.com.fart.sqlcmd.controller.command.Exit;
+import ua.com.fart.sqlcmd.controller.command.Find;
 import ua.com.fart.sqlcmd.controller.command.Help;
 import ua.com.fart.sqlcmd.controller.command.List;
-import ua.com.fart.sqlcmd.model.DataSet;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
 
@@ -15,17 +15,22 @@ public class MainController {
     MainController(View view, DatabaseManager manager){
         this.view = view;
         this.manager = manager;
-        this.commands = new Command[] {new Exit(view), new Help(view), new List(manager, view)};
+        this.commands = new Command[] {
+                new Exit(view),
+                new Help(view),
+                new List(view, manager),
+                new Find(view, manager)};
     }
 
     public void run(){
         connectToDB();
         while (true) {
+            String command = "";
             try {
                 view.write("Enter command or 'help' - for help");
-                String command = view.read();
-                if (command.startsWith("find")) {
-                    doFind(command);
+                command = view.read();
+                if (commands[3].canProces(command)) {//find
+                    commands[3].proces(command);
                 } else if (commands[2].canProces(command)) {//list
                     commands[2].proces(command);
                 } else if (commands[1].canProces(command)) {//help
@@ -35,43 +40,8 @@ public class MainController {
                 } else {
                     view.write("Incorrect command: '" + command + "' try again");
                 }
-            } catch(Exception e){view.write("Incorrect command, try again");}
+            } catch(Exception e){view.write("Incorrect command:'" + command + "' try again");}
         }
-    }
-
-    private void doFind(String command) {
-            String[] data = command.split("[,]");
-            String tableName = data[1];
-
-            DataSet[] tableData = manager.getTableData(tableName);
-            String[] tableColumns = manager.getTableColumns(tableName);
-            printHeader(tableColumns);
-            printTable(tableData);
-    }
-
-    private void printTable(DataSet[] tableData) {
-        for(DataSet row : tableData){
-            printRow(row);
-        }
-    }
-
-    private void printRow(DataSet row) {
-        Object [] result = row.getValues();
-        String rowString = "|";
-        for (Object value : result) {
-            rowString += value + "|";
-        }
-        view.write(rowString);
-    }
-
-    private void printHeader(String[] tableColumns) {
-        String result = "|";
-        for (String name : tableColumns) {
-            result += name + "|";
-        }
-        view.write("------------------");
-        view.write(result);
-        view.write("------------------");
     }
 
     private void connectToDB() {

@@ -25,8 +25,8 @@
     </role>
     <schema id="5" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-06-23.20:55:50.062</IntrospectionTimestamp>
-      <IntrospectionStateNumber>814</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-06-27.22:32:02.921</IntrospectionTimestamp>
+      <IntrospectionStateNumber>1059</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -45,18 +45,29 @@
     <schema id="10" parent="2" name="information_schema">
       <ObjectId>12113</ObjectId>
     </schema>
-    <sequence id="11" parent="5" name="user_new_column_seq">
+    <sequence id="11" parent="5" name="user2_id_seq">
+      <ObjectId>16493</ObjectId>
+      <StateNumber>1057</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="12" parent="5" name="user_new_column_seq">
       <ObjectId>16484</ObjectId>
       <StateNumber>806</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
     </sequence>
-    <table id="12" parent="5" name="user">
+    <table id="13" parent="5" name="user">
       <ObjectId>16394</ObjectId>
       <StateNumber>814</StateNumber>
     </table>
-    <column id="13" parent="12" name="id">
+    <table id="14" parent="5" name="user2">
+      <ObjectId>16490</ObjectId>
+      <StateNumber>1059</StateNumber>
+    </table>
+    <column id="15" parent="13" name="id">
       <Position>8</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -65,16 +76,37 @@
       <TypeId>23</TypeId>
       <SequenceName>user_new_column_seq</SequenceName>
     </column>
-    <column id="14" parent="12" name="name">
+    <column id="16" parent="13" name="name">
       <Position>9</Position>
       <DataType>varchar(20)|0</DataType>
       <StateNumber>813</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="15" parent="12" name="password">
+    <column id="17" parent="13" name="password">
       <Position>10</Position>
       <DataType>varchar(20)|0</DataType>
       <StateNumber>814</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="18" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1057</StateNumber>
+      <DefaultExpression>nextval(&apos;user2_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>user2_id_seq</SequenceName>
+    </column>
+    <column id="19" parent="14" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <StateNumber>1058</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="20" parent="14" name="password">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+      <StateNumber>1059</StateNumber>
       <TypeId>1043</TypeId>
     </column>
   </database-model>
