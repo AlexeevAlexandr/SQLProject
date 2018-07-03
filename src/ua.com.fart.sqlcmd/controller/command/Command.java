@@ -2,7 +2,7 @@ package ua.com.fart.sqlcmd.controller.command;
 
 public interface Command {
 
-    boolean canProces (String command);
+    boolean canProcess(String command);
 
-    void proces (String command);
+    void process(String command);
 }

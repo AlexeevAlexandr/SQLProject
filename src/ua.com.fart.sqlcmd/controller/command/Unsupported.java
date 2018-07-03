@@ -10,12 +10,12 @@ public class Unsupported implements Command {
     }
 
     @Override
-    public boolean canProces(String command) {
+    public boolean canProcess(String command) {
         return true;
     }
 
     @Override
-    public void proces(String command) {
+    public void process(String command) {
         view.write("Incorrect command: '" + command + "' try again");
     }
 }

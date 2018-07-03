@@ -32,26 +32,28 @@ public class Find implements Command {
 
     private void printRow(DataSet row) {
         Object [] result = row.getValues();
-        String rowString = "|";
+        StringBuilder rowString = new StringBuilder("|");
         for (Object value : result) {
-            rowString += value + "|";
+            rowString.append(value).append("|");
         }
-        view.write(rowString);
+        view.write(rowString.toString());
     }
 
     @Override
-    public boolean canProces(String command) {
+    public boolean canProcess(String command) {
         return command.startsWith("find");
     }
 
     @Override
-    public void proces(String command) {
-        String[] data = command.split("[,]");
-        String tableName = data[1];
+    public void process(String command) {
+        try {
+            String[] data = command.split("[,]");
+            String tableName = data[1];
 
-        DataSet[] tableData = manager.getTableData(tableName);
-        String[] tableColumns = manager.getTableColumns(tableName);
-        printHeader(tableColumns);
-        printTable(tableData);
+            DataSet[] tableData = manager.getTableData(tableName);
+            String[] tableColumns = manager.getTableColumns(tableName);
+            printHeader(tableColumns);
+            printTable(tableData);
+        }catch (Exception e){view.write("Incorrect command, try again.");}
     }
 }

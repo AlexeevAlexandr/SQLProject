@@ -11,18 +11,18 @@ public class Help implements Command{
     }
 
     @Override
-    public boolean canProces(String command) {
+    public boolean canProcess(String command) {
         return command.equals("help");
     }
 
     @Override
-    public void proces(String command) {
+    public void process(String command) {
         view.write("Available commands:");
         view.write("---------------------");
-        view.write("connect: for connection to the database, enter: connect,userName,password, dataBaseName\n");
-        view.write("list: for getting list of tables from base, what you did connect.\n");
-        view.write("find: for getting contents of your table, enter: find,tableName. tableName it's name of table, what you looking for. \n");
-        view.write("exit: for exit.");
+        view.write("connect: connection to the database, enter: connect,userName,password,dataBaseName\n");
+        view.write("list: to getting list of tables from base, what you did connect.\n");
+        view.write("find: to getting contents of your table, enter: find,tableName. tableName it's name of table, what you looking for. \n");
+        view.write("exit: to exit.");
         view.write("---------------------");
     }
 }

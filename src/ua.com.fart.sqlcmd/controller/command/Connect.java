@@ -4,6 +4,9 @@ import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
 
 public class Connect implements Command {
+
+    private static String COMMAND_SAMPLE = "connect,root,111111,postgres";
+
     private View view;
     private DatabaseManager manager;
 
@@ -13,15 +16,15 @@ public class Connect implements Command {
     }
 
     @Override
-    public boolean canProces(String command) {
+    public boolean canProcess(String command) {
         return command.startsWith("connect");
     }
 
     @Override
-    public void proces(String command) {
+    public void process(String command) {
         try {
             String [] data = command.split("[,]");
-            if(data.length != 4){
+            if(data.length != count()){
                 throw new IllegalArgumentException("Not correct entered number of parameters");
             }
             String userName = data[1];
@@ -31,6 +34,11 @@ public class Connect implements Command {
             view.write("Connect is successful");
         } catch (Exception e) {printError(e);}
     }
+
+    private int count() {
+        return COMMAND_SAMPLE.split("[,]").length;
+    }
+
     private void printError(Exception e) {
         String message = (e.getCause() != null) ? e.getMessage() + " " + e.getCause().getMessage() : e.getMessage();
         view.write("Connect isn't successful:\n" + message + "\n" + "Try again.");

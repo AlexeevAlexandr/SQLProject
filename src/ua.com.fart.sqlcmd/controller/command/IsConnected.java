@@ -3,27 +3,24 @@ package ua.com.fart.sqlcmd.controller.command;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
 
-import java.util.Arrays;
-
-public class List implements Command {
+public class IsConnected implements Command {
 
     private DatabaseManager manager;
     private View view;
 
-
-    public List(View view, DatabaseManager manager){
+    public IsConnected(DatabaseManager manager, View view) {
         this.manager = manager;
         this.view = view;
     }
+
     @Override
     public boolean canProcess(String command) {
-        return command.equals("list");
+        return !manager.isConnected();
     }
 
     @Override
     public void process(String command) {
-        String [] tebleNames = manager.getTableNames();
-        String message = Arrays.toString(tebleNames);
-        view.write(message+"\n");
+        view.write("You can't use any commands while not connected to database with command: " +
+                "connect,userName,password,databaseName");
     }
 }
