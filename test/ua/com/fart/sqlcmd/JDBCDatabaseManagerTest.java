@@ -1,4 +1,4 @@
-package ua.com.fart.sqlcmd.test;
+package ua.com.fart.sqlcmd;
 
 import org.junit.Before;
 import org.junit.Test;

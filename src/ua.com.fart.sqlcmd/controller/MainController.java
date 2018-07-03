@@ -26,16 +26,17 @@ public class MainController {
                 new Find(view, manager),
                 new Unsupported(view)};
     }
+
     public void run(){
         try {
             doWork();
-        } catch(Exception e){view.write("Incorrect command try again");}
+        } catch(Exception e){/*do nothing*/}
     }
 
     private void doWork() {
-        view.write("Hi user!");
-        view.write("Enter please username, password and databaseName.\n" +
-                "format have to be: connect,userName,password,databaseName");
+        view.write("Hello!");
+        view.write("Enter please username, password and databaseName");
+        view.write("format have to be: connect,userName,password,databaseName");
 
         while (true) {
             String input = view.read();

@@ -19,9 +19,9 @@ public class Help implements Command{
     public void process(String command) {
         view.write("Available commands:");
         view.write("---------------------");
-        view.write("connect: connection to the database, enter: connect,userName,password,dataBaseName\n");
-        view.write("list: to getting list of tables from base, what you did connect.\n");
-        view.write("find: to getting contents of your table, enter: find,tableName. tableName it's name of table, what you looking for. \n");
+        view.write("connect: connection to the database, enter: connect,userName,password,dataBaseName");
+        view.write("list: to getting list of tables from base, what you did connect.");
+        view.write("find: to getting contents of your table, enter: find,tableName. tableName it's name of table, what you looking for.");
         view.write("exit: to exit.");
         view.write("---------------------");
     }
