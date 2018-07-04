@@ -22,8 +22,8 @@ public class List implements Command {
 
     @Override
     public void process(String command) {
-        String [] tebleNames = manager.getTableNames();
-        String message = Arrays.toString(tebleNames);
+        String [] tableNames = manager.getTableNames();
+        String message = Arrays.toString(tableNames);
         view.write("");
         view.write(message);
         view.write("");

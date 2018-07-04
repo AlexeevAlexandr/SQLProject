@@ -3,8 +3,6 @@ package ua.com.fart.sqlcmd;
 import org.junit.Before;
 import org.junit.Test;
 import ua.com.fart.sqlcmd.controller.Main;
-import ua.com.fart.sqlcmd.model.DatabaseManager;
-import ua.com.fart.sqlcmd.model.JDBCDatabaseManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,7 +14,6 @@ public class IntegrationTest {
 
     private static ConfigurableInputStream in;
     private static ByteArrayOutputStream out;
-    private DatabaseManager databaseManager;
 
     private String getData() {
         try {
@@ -30,7 +27,6 @@ public class IntegrationTest {
 
     @Before
     public void setup(){
-        databaseManager = new JDBCDatabaseManager();
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
         System.setIn(in);
@@ -83,7 +79,8 @@ public class IntegrationTest {
                 "------------------\r\n" +
                 "|id|name|password|\r\n" +
                 "------------------\r\n" +
-                "|15|Stiven|fhdhfjfjjfjf|\r\n" +
+                "|13|Stiven|******|\r\n" +
+                "|14|Eva|++++++|\r\n" +
                 "Enter command or 'help' - to help"),getData().trim());
     }
 
@@ -98,9 +95,11 @@ public class IntegrationTest {
                 "Available commands:\r\n" +
                 "---------------------\r\n" +
                 "connect: connection to the database, enter: connect,userName,password,dataBaseName\r\n" +
-                "list: to getting list of tables from base, what you did connect.\r\n" +
-                "find: to getting contents of your table, enter: find,tableName. tableName it's name of table, what you looking for.\r\n" +
-                "exit: to exit.\r\n" +
+                "list: to getting list of tables from base, what you did connect\r\n" +
+                "clear: to clear all data from table, format query have to be: clear,tableName\r\n" +
+                "create: to create data in table, format query have to be: create,tableName,nameColumn1,value,nameColumn2,value,nameColumn3,value.......nameColumnN,value\r\n" +
+                "find: to getting contents from table, format query have to be: find,tableName. tableName it's name of table, what you looking for\r\n" +
+                "exit: to exit\r\n" +
                 "---------------------\r\n" +
                 "Enter command or 'help' - to help\r\n" +
                 "Good by, see you soon."),getData().trim());
@@ -145,5 +144,66 @@ public class IntegrationTest {
                 "Enter command or 'help' - to help\r\n" +
                 "Incorrect command: 'command' try again\r\n" +
                 "Enter command or 'help' - to help"), getData().trim());
+    }
+
+    @Test
+    public void testClear() {
+        in.add("connect,root,111111,postgres");
+        in.add("clear,user");
+        in.add("create,user,id,13,name,Stiven,password,******");
+        in.add("create,user,id,14,name,Eva,password,++++++");
+        in.add("find,user");
+        in.add("exit");
+        Main.main(new String[0]);
+        assertEquals(("Hello!\r\n" +
+                "Enter please username, password and databaseName\r\n" +
+                "format have to be: connect,userName,password,databaseName\r\n" +
+                "Connect is successful\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "Table 'user' was cleared\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "{names: [id, name, password], values: [13, Stiven, ******]} recorded in table: user\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "{names: [id, name, password], values: [14, Eva, ++++++]} recorded in table: user\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "------------------\r\n" +
+                "|id|name|password|\r\n" +
+                "------------------\r\n" +
+                "|13|Stiven|******|\r\n" +
+                "|14|Eva|++++++|\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "Good by, see you soon."), getData().trim());
+    }
+
+    @Test
+    public void testClearWithError() {
+        in.add("connect,root,111111,postgres");
+        in.add("clear,");
+        in.add("exit");
+        Main.main(new String[0]);
+        assertEquals(("Hello!\r\n" +
+                "Enter please username, password and databaseName\r\n" +
+                "format have to be: connect,userName,password,databaseName\r\n" +
+                "Connect is successful\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "Incorrect command, try again\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "Good by, see you soon."), getData().trim());
+    }
+
+    @Test
+    public void testCreateWithError() {
+        in.add("connect,root,111111,postgres");
+        in.add("create,");
+        in.add("exit");
+        Main.main(new String[0]);
+        assertEquals(("Hello!\r\n" +
+                "Enter please username, password and databaseName\r\n" +
+                "format have to be: connect,userName,password,databaseName\r\n" +
+                "Connect is successful\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "Incorrect command, try again\r\n" +
+                "Enter command or 'help' - to help\r\n" +
+                "Good by, see you soon."), getData().trim());
     }
 }
