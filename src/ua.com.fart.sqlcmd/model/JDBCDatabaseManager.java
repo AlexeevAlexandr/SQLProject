@@ -109,8 +109,8 @@ public class JDBCDatabaseManager implements DatabaseManager {
         try {
             Statement stmt = connection.createStatement();
 
-            String tableNames = getNameFormated(input, "%s,");
-            String values = getValuesFormated(input,"'%s',");
+            String tableNames = getNameFormatted(input, "%s,");
+            String values = getValuesFormatted(input,"'%s',");
 
             stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
@@ -124,7 +124,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     @Override
     public void update(String tableName, int id, DataSet newValue) {
         try{
-            String tableNames = getNameFormated(newValue, "%s = ?,");
+            String tableNames = getNameFormatted(newValue, "%s = ?,");
 
             PreparedStatement ps = connection.prepareStatement(
                     "UPDATE public."+tableName+" SET " + tableNames + " WHERE id = ?");
@@ -139,7 +139,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
 
-     private String getNameFormated(DataSet newValue, String format) {
+     private String getNameFormatted(DataSet newValue, String format) {
         StringBuilder string = new StringBuilder();
         for (String name : newValue.getNames()) {
             string.append(String.format(format, name));
@@ -149,7 +149,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
 
-     private String getValuesFormated(DataSet input, String format) {
+     private String getValuesFormatted(DataSet input, String format) {
         StringBuilder values = new StringBuilder();
         for (Object value: input.getValues()) {
             values.append(String.format(format, value));

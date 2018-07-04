@@ -25,7 +25,7 @@ public class Connect implements Command {
         try {
             String [] data = command.split("[,]");
             if(data.length != count()){
-                throw new IllegalArgumentException("Not correct entered number of parameters");
+                throw new IllegalArgumentException("incorrect entered number of parameters");
             }
             String userName = data[1];
             String password = data[2];
@@ -41,6 +41,7 @@ public class Connect implements Command {
 
     private void printError(Exception e) {
         String message = (e.getCause() != null) ? e.getMessage() + " " + e.getCause().getMessage() : e.getMessage();
-        view.write("Connect isn't successful:\n" + message + "\n" + "Try again.");
+        view.write("Connect unsuccessful: "+message);
+        view.write("Try again.");
     }
 }
