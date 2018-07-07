@@ -17,6 +17,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
 
         try {//connection
+            if (connection != null){connection.close();}//closing the old connection before reusing
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"
                     +database, user, password);
         } catch (SQLException e) {
@@ -32,7 +33,8 @@ public class JDBCDatabaseManager implements DatabaseManager {
     //SELECT-B
     @Override
     public DataSet[] getTableData(String tableName) {
-        try(Statement stmt = connection.createStatement();ResultSet rs = stmt.executeQuery("SELECT * FROM public." + tableName)){
+        try(Statement stmt = connection.createStatement();ResultSet rs = stmt.executeQuery("SELECT * FROM public." + tableName))
+        {
             int size = getSize(tableName);
             ResultSetMetaData rsmd = rs.getMetaData();
             DataSet[] result = new DataSet[size];
@@ -71,7 +73,9 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     @Override
     public int getSize(String tableName){
-        try(Statement stmt = connection.createStatement(); ResultSet rsCount = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName)){
+        try(Statement stmt = connection.createStatement();
+            ResultSet rsCount = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName))
+        {
             rsCount.next();
             return rsCount.getInt(1);
         }catch(SQLException e){
@@ -105,20 +109,18 @@ public class JDBCDatabaseManager implements DatabaseManager {
     //UPDATE
     @Override
     public void update(String tableName, int id, DataSet newValue) {
-        try{
-            String tableNames = getNameFormatted(newValue, "%s = ?,");
-            PreparedStatement ps = connection.prepareStatement(
-                    "UPDATE public."+tableName+" SET " + tableNames + " WHERE id = ?");
-            int index = 1;
+        String tableNames = getNameFormatted(newValue, "%s = ?,");
+        int index = 1;
+        try(PreparedStatement ps = connection.prepareStatement(
+                "UPDATE public."+tableName+" SET " + tableNames + " WHERE id = ?"))
+        {
             for (Object value : newValue.getValues()){
                 ps.setObject(index++, value);
             }
             ps.setInt(index, id);
             ps.executeUpdate();
-            ps.close();
         }catch(Exception e){e.printStackTrace();}
     }
-
 
      private String getNameFormatted(DataSet newValue, String format) {
         StringBuilder string = new StringBuilder();
@@ -143,7 +145,8 @@ public class JDBCDatabaseManager implements DatabaseManager {
     @Override
     public String[] getTableColumns(String tableName) {
         try(Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'")) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'"))
+        {
             String[] tables = new String[100];
             int index = 0;
             while (rs.next()) {
