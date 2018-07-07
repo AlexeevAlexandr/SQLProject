@@ -1,4 +1,4 @@
-package ua.com.fart.sqlcmd;
+package ua.com.fart.sqlcmd.IntegrationTests;
 
 import java.io.InputStream;
 
