@@ -10,6 +10,8 @@ import ua.com.fart.sqlcmd.model.DataSet;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class FindTest {
@@ -21,6 +23,20 @@ public class FindTest {
     public void setup() {
         manager = mock(DatabaseManager.class);
         view = mock(View.class);
+    }
+
+    @Test
+    public void testCanProcessFindString(){
+        Command command = new Find(view,manager);
+        boolean canProcess = command.canProcess("find,user");
+        assertTrue(canProcess);
+    }
+
+    @Test
+    public void testCanProcessFindCommandIncorrectFirstParameter() {
+        Command command = new Find(view, manager);
+        boolean canProcess = command.canProcess("fond");
+        assertFalse(canProcess);
     }
 
     @Test
@@ -46,11 +62,9 @@ public class FindTest {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(view, atLeastOnce()).write(captor.capture());
         Assert.assertEquals("[------------------, " +
-                                    "|id,name.password|, " +
-                                    "------------------, " +
-                                    "|12|Stevenson|123456|, " +
-                                    "|13|Eva|654321|]", captor.getAllValues().toString());
+                "|id,name.password|, " +
+                "------------------, " +
+                "|12|Stevenson|123456|, " +
+                "|13|Eva|654321|]", captor.getAllValues().toString());
     }
-
-
 }
