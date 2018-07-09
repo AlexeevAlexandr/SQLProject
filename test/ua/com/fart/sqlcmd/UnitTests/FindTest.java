@@ -59,12 +59,16 @@ public class FindTest {
 
         command.process("find,user");
 
+        shouldPrint("[------------------, " +
+                            "|id,name.password|, " +
+                            "------------------, " +
+                            "|12|Stevenson|123456|, " +
+                            "|13|Eva|654321|]");
+    }
+
+    private void shouldPrint(String expected) {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(view, atLeastOnce()).write(captor.capture());
-        Assert.assertEquals("[------------------, " +
-                "|id,name.password|, " +
-                "------------------, " +
-                "|12|Stevenson|123456|, " +
-                "|13|Eva|654321|]", captor.getAllValues().toString());
+        Assert.assertEquals(expected, captor.getAllValues().toString());
     }
 }
