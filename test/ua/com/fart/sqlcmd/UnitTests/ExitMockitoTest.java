@@ -1,15 +1,16 @@
 package ua.com.fart.sqlcmd.UnitTests;
 
-import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 import ua.com.fart.sqlcmd.controller.command.Command;
 import ua.com.fart.sqlcmd.controller.command.Exit;
 import ua.com.fart.sqlcmd.controller.command.ExitException;
+import ua.com.fart.sqlcmd.view.View;
 
 import static org.junit.Assert.*;
 
-public class ExitTest {
-    private TestView view = new TestView();
+public class ExitMockitoTest {
+    private View view = Mockito.mock(View.class);
 
     @Test
     public void testCanProcessExitString(){
@@ -32,7 +33,7 @@ public class ExitTest {
             command.process("exit");
             fail("Expected ExitException");
         }catch (ExitException ignored){}
-        Assert.assertEquals("Good by, see you soon.",view.getContent().trim());
+        Mockito.verify(view).write("Good by, see you soon.");
     }
 
 
