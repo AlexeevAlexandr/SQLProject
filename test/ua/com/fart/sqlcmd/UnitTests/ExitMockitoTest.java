@@ -1,5 +1,6 @@
 package ua.com.fart.sqlcmd.UnitTests;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import ua.com.fart.sqlcmd.controller.command.Command;
@@ -11,24 +12,27 @@ import static org.junit.Assert.*;
 
 public class ExitMockitoTest {
     private View view = Mockito.mock(View.class);
+    private Command command;
+
+    @Before
+    public void setup() {
+        command = new Exit(view);
+    }
 
     @Test
     public void testCanProcessExitString(){
-        Command command = new Exit(view);
         boolean canProcess = command.canProcess("exit");
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanProcessExitCommand(){
-        Command command = new Exit(view);
         boolean canProcess = command.canProcess("ewre");
         assertFalse(canProcess);
     }
 
     @Test
     public void testCanProcessExitCommand_throwsExitException(){
-        Command command = new Exit(view);
         try {
             command.process("exit");
             fail("Expected ExitException");

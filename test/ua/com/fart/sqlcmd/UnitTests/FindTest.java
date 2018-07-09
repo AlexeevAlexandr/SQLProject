@@ -18,30 +18,30 @@ public class FindTest {
 
     private DatabaseManager manager;
     private View view;
+    private Command command;
 
     @Before
     public void setup() {
         manager = mock(DatabaseManager.class);
         view = mock(View.class);
+        command = new Find(view,manager);
     }
 
     @Test
     public void testCanProcessFindString(){
-        Command command = new Find(view,manager);
+
         boolean canProcess = command.canProcess("find,user");
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanProcessFindCommandIncorrectFirstParameter() {
-        Command command = new Find(view, manager);
         boolean canProcess = command.canProcess("fond");
         assertFalse(canProcess);
     }
 
     @Test
     public void testPrintTableData(){
-        Command command = new Find(view,manager);
         when(manager.getTableColumns("user")).thenReturn(new String[] {"id,name.password"});
 
         DataSet user1 = new DataSet();
