@@ -53,9 +53,8 @@ public class FindTest {
         user2.put("id",13);
         user2.put("name","Eva");
         user2.put("password","654321");
-        DataSet [] data = new DataSet[] {user1, user2};
 
-        when(manager.getTableData("user")).thenReturn(data);
+        when(manager.getTableData("user")).thenReturn(new DataSet[] {user1, user2});
 
         command.process("find,user");
 
