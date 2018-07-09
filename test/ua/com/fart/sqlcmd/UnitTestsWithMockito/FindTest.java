@@ -1,4 +1,4 @@
-package ua.com.fart.sqlcmd.UnitTests;
+package ua.com.fart.sqlcmd.UnitTestsWithMockito;
 
 import org.junit.Assert;
 import org.junit.Before;

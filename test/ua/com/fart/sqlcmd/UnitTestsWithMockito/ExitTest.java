@@ -1,4 +1,4 @@
-package ua.com.fart.sqlcmd.UnitTests;
+package ua.com.fart.sqlcmd.UnitTestsWithMockito;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import ua.com.fart.sqlcmd.view.View;
 
 import static org.junit.Assert.*;
 
-public class ExitMockitoTest {
+public class ExitTest {
     private View view = Mockito.mock(View.class);
     private Command command;
 
