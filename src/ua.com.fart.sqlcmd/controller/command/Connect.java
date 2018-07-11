@@ -28,9 +28,7 @@ public class Connect implements Command {
             if(data.length != count()){
                 throw new IllegalArgumentException("incorrect entered number of parameters");
             }
-            String userName = data[1];
-            String password = data[2];
-            String databaseName = data[3];
+            String userName = data[1], password = data[2], databaseName = data[3];
             manager.connect(userName, password, databaseName);
             if (!manager.isConnected()) {throw new IllegalArgumentException("error connection: " +
                     "username, password or database name not found, check entering data");}

@@ -150,6 +150,7 @@ public class IntegrationTest {
     public void testClear() {
         in.add("connect,root,111111,postgres");
         in.add("clear,user");
+        in.add("y");
         in.add("create,user,id,13,name,Stiven,password,******");
         in.add("create,user,id,14,name,Eva,password,++++++");
         in.add("find,user");
@@ -160,6 +161,8 @@ public class IntegrationTest {
                 "format have to be: connect,userName,password,databaseName\r\n" +
                 "Connect is successful\r\n" +
                 "Enter command or 'help' - to help\r\n" +
+                "You try clear table user\r\n"+
+                "Confirm deleting data (y - confirm, another key - abort)\r\n"+
                 "Table 'user' was cleared\r\n" +
                 "Enter command or 'help' - to help\r\n" +
                 "{names: [id, name, password], values: [13, Stiven, ******]} recorded in table: user\r\n" +

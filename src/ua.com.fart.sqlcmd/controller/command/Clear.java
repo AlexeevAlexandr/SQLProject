@@ -24,12 +24,21 @@ public class Clear implements Command {
         if (data.length != 2) {
             throw  new IllegalArgumentException("Format of command have to be: clear,tableName");
         }
-        manager.clear(data[1]);
-        String [] tableNames = manager.getTableNames();
-        for(String tableName : tableNames) {
-            if (tableName.equals(data[1])) {
-                view.write("Table '" + data[1] + "' was cleared");
+        confirmClear(data[1]);
+    }
+
+    private void confirmClear(String datum) {
+        view.write("You try clear table " + datum);
+        view.write("Confirm deleting data (y - confirm, another key - abort)");
+        String confirm = view.read();
+        if (confirm.equals("y")) {
+            manager.clear(datum);
+            String[] tableNames = manager.getTableNames();
+            for (String tableName : tableNames) {
+                if (tableName.equals(datum)) {
+                    view.write("Table '" + datum + "' was cleared");
+                }
             }
-        }
+        }else{view.write("operation aborted");}
     }
 }
