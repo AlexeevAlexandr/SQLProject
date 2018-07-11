@@ -7,10 +7,8 @@ import ua.com.fart.sqlcmd.controller.command.Command;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class ClearTest {
 
@@ -28,7 +26,7 @@ public class ClearTest {
     @Test
     public void testCanProcessClearCommandTrue(){
 
-        boolean canProcess = command.canProcess("clear");
+        boolean canProcess = command.canProcess("clear,");
         assertTrue(canProcess);
     }
 
@@ -38,10 +36,30 @@ public class ClearTest {
         assertFalse(canProcess);
     }
 
+//    @Test
+//    public void testClearTableData(){
+//        command.process("clear,user");
+//        verify(manager).clear("user");
+//        verify(view).write("Table 'user' was cleared");
+//    }
+
     @Test
-    public void testClearTableData(){
-        command.process("clear,user");
-        verify(manager).clear("user");
-        verify(view).write("Table 'user' was cleared");
+    public void testClearTableData2(){
+        try{
+            command.process("clear");
+            fail();
+        }catch(IllegalArgumentException e){
+        assertEquals("Format of command have to be: clear,tableName", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testClearTableData3(){
+        try{
+            command.process("clear,data,data");
+            fail();
+        }catch(IllegalArgumentException e){
+        assertEquals("Format of command have to be: clear,tableName", e.getMessage());
+        }
     }
 }

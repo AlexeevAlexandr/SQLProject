@@ -13,19 +13,23 @@ public class Clear implements Command {
         this.view = view;
     }
     @Override
+
     public boolean canProcess(String command) {
         return command.startsWith("clear");
     }
 
     @Override
     public void process(String command) {
-        try {
-            String[] data = command.split("[,]");
-            if (data.length != 2) {
-                throw new IllegalArgumentException("Format of command have to be: clear,tableName");
+        String[] data = command.split("[,]");
+        if (data.length != 2) {
+            throw  new IllegalArgumentException("Format of command have to be: clear,tableName");
+        }
+        manager.clear(data[1]);
+        String [] tableNames = manager.getTableNames();
+        for(String tableName : tableNames) {
+            if (tableName.equals(data[1])) {
+                view.write("Table '" + data[1] + "' was cleared");
             }
-            manager.clear(data[1]);
-            view.write("Table '" + data[1] + "' was cleared");
-        }catch(Exception e){view.write("Incorrect command, try again");}
+        }
     }
 }

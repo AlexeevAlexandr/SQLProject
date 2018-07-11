@@ -15,7 +15,7 @@ public class IntegrationTest {
     private static ConfigurableInputStream in;
     private static ByteArrayOutputStream out;
 
-    private String getData() {
+    String getData() {
         try {
             String result = new String(out.toByteArray(), "UTF-8");
             out.reset();
@@ -52,7 +52,7 @@ public class IntegrationTest {
                 "Enter please username, password and databaseName\r\n" +
                 "format have to be: connect,userName,password,databaseName\r\n" +
                 "Connect unsuccessful: incorrect entered number of parameters\r\n" +
-                "Try again.\r\n" +
+                "Try again\r\n" +
                 "Enter command or 'help' - to help",getData().trim());
     }
 
@@ -186,7 +186,7 @@ public class IntegrationTest {
                 "format have to be: connect,userName,password,databaseName\r\n" +
                 "Connect is successful\r\n" +
                 "Enter command or 'help' - to help\r\n" +
-                "Incorrect command, try again\r\n" +
+                "Incorrect command: 'clear,' try again\r\n" +
                 "Enter command or 'help' - to help\r\n" +
                 "Good by, see you soon."), getData().trim());
     }

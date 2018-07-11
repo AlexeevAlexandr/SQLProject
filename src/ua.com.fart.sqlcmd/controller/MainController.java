@@ -36,9 +36,15 @@ public class MainController {
         while (true) {
             String input = view.read();
             for (Command command : commands) {
-                if (command.canProcess(input)) {
-                    command.process(input);
-                    break;
+                try {
+                    if (command.canProcess(input)) {
+                        command.process(input);
+                        break;
+                    }
+                }catch (Exception e) {
+                    if (e instanceof ExitException) {
+                        throw e;
+                    }
                 }
             }
             view.write("Enter command or 'help' - to help");

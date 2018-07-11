@@ -21,7 +21,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"
                     +database, user, password);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Incorrect data in command: "+e);
         }
 
     }
@@ -56,15 +56,15 @@ public class JDBCDatabaseManager implements DatabaseManager {
     //SELECT-A
     @Override
     public String[] getTableNames(){
-        try (Statement stmt = connection.createStatement();ResultSet rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")){
-        String [] tables = new String[100];
-        int index = 0;
-        while(rs.next()) {
-            tables [index++] = rs.getString("table_name");
-        }
-        tables = Arrays.copyOf(tables, index, String [].class);
-        return tables;
-        } catch (SQLException e) {
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public'"))
+        {
+            String [] tables = new String[100];
+            int index = 0;
+            while(rs.next()) { tables [index++] = rs.getString("table_name"); }
+            tables = Arrays.copyOf(tables, index, String [].class);
+            return tables;
+        }catch (SQLException e) {
             e.printStackTrace();
             return new String[0];
         }
@@ -89,7 +89,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     public void clear(String tableName){
         try( Statement stmt = connection.createStatement()){
             stmt.executeUpdate("DELETE FROM public."+tableName);
-        }catch(SQLException e){e.printStackTrace();}
+        }catch(SQLException e){System.out.println("Table '" + tableName + "' didn't found");}
     }
 
     //INSERT
@@ -122,7 +122,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }catch(Exception e){e.printStackTrace();}
     }
 
-     private String getNameFormatted(DataSet newValue, String format) {
+    private String getNameFormatted(DataSet newValue, String format) {
         StringBuilder string = new StringBuilder();
         for (String name : newValue.getNames()) {
             string.append(String.format(format, name));
@@ -132,7 +132,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
 
-     private String getValuesFormatted(DataSet input, String format) {
+    private String getValuesFormatted(DataSet input, String format) {
         StringBuilder values = new StringBuilder();
         for (Object value: input.getValues()) {
             values.append(String.format(format, value));

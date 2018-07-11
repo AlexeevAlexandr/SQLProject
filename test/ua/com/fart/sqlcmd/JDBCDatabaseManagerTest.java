@@ -12,22 +12,26 @@ import static junit.framework.TestCase.assertEquals;
 
 public class JDBCDatabaseManagerTest {
     DatabaseManager manager;
+
         @Before
         public void setup () throws SQLException {
             manager = new JDBCDatabaseManager();
             manager.connect("root", "111111", "postgres");
         }
+
         @Test
         public void testGetAllTableNames(){
             String [] tableNames = manager.getTableNames();
-            assertEquals("[user]", Arrays.toString(tableNames));
+            assertEquals("[user, user2]", Arrays.toString(tableNames));
         }
+
         @Test
         public void clearData() {
             manager.clear("user");
             DataSet[] users = manager.getTableData("user");
             assertEquals(0, users.length);
         }
+
         @Test
         public void testGetTableData(){
             manager.clear("user");
@@ -44,6 +48,7 @@ public class JDBCDatabaseManagerTest {
             assertEquals("[1, Stiven, pass]", Arrays.toString(user.getValues()));
 
         }
+
         @Test
         public void testUpdateTableData() {
 
@@ -67,6 +72,7 @@ public class JDBCDatabaseManagerTest {
         assertEquals("[id, name, password]", Arrays.toString(user.getNames()));
         assertEquals("[13, Pup, pass2]", Arrays.toString(user.getValues()));
     }
+
         @Test
         public void testGetColumnNames() {
         manager.clear("user");

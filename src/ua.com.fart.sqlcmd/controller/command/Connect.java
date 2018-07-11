@@ -22,7 +22,8 @@ public class Connect implements Command {
 
     @Override
     public void process(String command) {
-        try {
+        try
+        {
             String [] data = command.split("[,]");
             if(data.length != count()){
                 throw new IllegalArgumentException("incorrect entered number of parameters");
@@ -31,6 +32,8 @@ public class Connect implements Command {
             String password = data[2];
             String databaseName = data[3];
             manager.connect(userName, password, databaseName);
+            if (!manager.isConnected()) {throw new IllegalArgumentException("error connection: " +
+                    "username, password or database name not found, check entering data");}
             view.write("Connect is successful");
         } catch (Exception e) {printError(e);}
     }
@@ -42,6 +45,6 @@ public class Connect implements Command {
     private void printError(Exception e) {
         String message = (e.getCause() != null) ? e.getMessage() + " " + e.getCause().getMessage() : e.getMessage();
         view.write("Connect unsuccessful: "+message);
-        view.write("Try again.");
+        view.write("Try again");
     }
 }
