@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.*;
 
 public class JDBCDatabaseManager implements DatabaseManager {
+    private static final String DATABASE_DRIVER = "org.postgresql.Driver";
+    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/";
     private Connection connection;
 
     //CONNECT
@@ -11,18 +13,16 @@ public class JDBCDatabaseManager implements DatabaseManager {
     public void connect(String user, String password, String database){
 
         try { //check driver
-            Class.forName("org.postgresql.Driver");
+            Class.forName(DATABASE_DRIVER);
         }catch(ClassNotFoundException e){
-            System.out.println("Couldn't find the JDBC driver");
-            e.printStackTrace();
+            System.out.println("Couldn't find the JDBC driver\n" + e);
         }
 
         try {//connection
             if (connection != null){connection.close();}//closing the old connection before reusing
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"
-                    +database, user, password);
+            connection = DriverManager.getConnection(DATABASE_URL + database, user, password);
         } catch (SQLException e) {
-            System.out.println("Incorrect data in command: "+e);
+            System.out.println("Incorrect data in command: " + e);
         }
 
     }
@@ -133,7 +133,6 @@ public class JDBCDatabaseManager implements DatabaseManager {
         return string.toString();
     }
 
-
     private String getValuesFormatted(DataSet input, String format) {
         StringBuilder values = new StringBuilder();
         for (Object value: input.getValues()) {
@@ -143,7 +142,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         return values.toString();
     }
 
-
+    //LIST
     @Override
     public String[] getTableColumns(String tableName) {
         try(Statement stmt = connection.createStatement();
