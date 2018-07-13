@@ -5,8 +5,6 @@ import ua.com.fart.sqlcmd.view.View;
 
 public class Connect implements Command {
 
-    private static String COMMAND_SAMPLE = "connect,root,111111,postgres";
-
     private View view;
     private DatabaseManager manager;
 
@@ -37,6 +35,7 @@ public class Connect implements Command {
     }
 
     private int count() {
+        String COMMAND_SAMPLE = "connect,root,111111,postgres";
         return COMMAND_SAMPLE.split("[,]").length;
     }
 

@@ -3,6 +3,7 @@ package ua.com.fart.sqlcmd.model;
 import java.sql.Connection;
 
 public interface DatabaseManager {
+
     void connect(String user, String password, String database);
 
     Connection getConnection();

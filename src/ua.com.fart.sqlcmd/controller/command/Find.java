@@ -17,11 +17,11 @@ public class Find implements Command {
     private void printHeader(String[] tableColumns) {
         StringBuilder result = new StringBuilder("|");
         for (String name : tableColumns) {
-            result.append(name).append("|");
+            result.append(String.format("%-10s",name)).append("|");
         }
-        view.write("------------------");
+        view.write("==================================");
         view.write(result.toString());
-        view.write("------------------");
+        view.write("==================================");
     }
 
     private void printTable(DataSet[] tableData) {
@@ -34,9 +34,10 @@ public class Find implements Command {
         Object [] result = row.getValues();
         StringBuilder rowString = new StringBuilder("|");
         for (Object value : result) {
-            rowString.append(value).append("|");
+            rowString.append(String.format("%-10s",value)).append("|");
         }
         view.write(rowString.toString());
+        view.write("----------------------------------");
     }
 
     @Override
@@ -46,10 +47,10 @@ public class Find implements Command {
 
     @Override
     public void process(String command) {
-        try {
+        try
+        {
             String[] data = command.split("[,]");
             String tableName = data[1];
-
             DataSet[] tableData = manager.getTableData(tableName);
             String[] tableColumns = manager.getTableColumns(tableName);
             printHeader(tableColumns);

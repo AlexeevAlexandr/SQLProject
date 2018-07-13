@@ -58,11 +58,13 @@ public class FindTest {
 
         command.process("find,user");
 
-        shouldPrint("[------------------, " +
+        shouldPrint("[==================================, " +
                             "|id,name.password|, " +
-                            "------------------, " +
-                            "|12|Stevenson|123456|, " +
-                            "|13|Eva|654321|]");
+                            "==================================, " +
+                            "|12        |Stevenson |123456    |, " +
+                            "----------------------------------, " +
+                            "|13        |Eva       |654321    |, " +
+                            "----------------------------------]");
     }
 
     private void shouldPrint(String expected) {

@@ -76,11 +76,13 @@ public class IntegrationTest {
                 "format have to be: connect,userName,password,databaseName\r\n" +
                 "Connect is successful\r\n" +
                 "Enter command or 'help' - to help\r\n" +
-                "------------------\r\n" +
-                "|id|name|password|\r\n" +
-                "------------------\r\n" +
-                "|13|Stiven|******|\r\n" +
-                "|14|Eva|++++++|\r\n" +
+                "==================================\r\n" +
+                "|id        |name      |password  |\r\n" +
+                "==================================\r\n" +
+                "|13        |Stiven    |******    |\r\n" +
+                "----------------------------------\r\n" +
+                "|14        |Eva       |++++++    |\r\n" +
+                "----------------------------------\r\n" +
                 "Enter command or 'help' - to help"),getData().trim());
     }
 
@@ -92,15 +94,23 @@ public class IntegrationTest {
         assertEquals(("Hello!\r\n" +
                 "Enter please username, password and databaseName\r\n" +
                 "format have to be: connect,userName,password,databaseName\r\n" +
+                "=========================================================================================\r\n" +
                 "Available commands:\r\n" +
-                "---------------------\r\n" +
+                "=========================================================================================\r\n" +
                 "connect: connection to the database, enter: connect,userName,password,dataBaseName\r\n" +
-                "list: to getting list of tables from base, what you did connect\r\n" +
-                "clear: to clear all data from table, format query have to be: clear,tableName\r\n" +
-                "create: to create data in table, format query have to be: create,tableName,nameColumn1,value,nameColumn2,value,nameColumn3,value.......nameColumnN,value\r\n" +
-                "find: to getting contents from table, format query have to be: find,tableName. tableName it's name of table, what you looking for\r\n" +
-                "exit: to exit\r\n" +
-                "---------------------\r\n" +
+                "-----------------------------------------------------------------------------------------\r\n" +
+                "list:    getting list of tables from base, what you did connect\r\n" +
+                "-----------------------------------------------------------------------------------------\r\n" +
+                "clear:   clear all data from table, format query have to be: clear,tableName\r\n" +
+                "-----------------------------------------------------------------------------------------\r\n" +
+                "create:  create data in table, format query have to be: \r\n" +
+                "create,tableName,nameColumn1,value1,nameColumn2,value2,nameColumn3,value3...nameColumnN,valueN\r\n" +
+                "-----------------------------------------------------------------------------------------\r\n" +
+                "find:    getting contents from table, format query have to be: find,tableName.\r\n" +
+                "tableName it's name of table, what you are looking for\r\n" +
+                "-----------------------------------------------------------------------------------------\r\n" +
+                "exit:    to exit\r\n" +
+                "=========================================================================================\r\n" +
                 "Enter command or 'help' - to help\r\n" +
                 "Good by, see you soon."),getData().trim());
     }
@@ -169,11 +179,13 @@ public class IntegrationTest {
                 "Enter command or 'help' - to help\r\n" +
                 "{names: [id, name, password], values: [14, Eva, ++++++]} recorded in table: user\r\n" +
                 "Enter command or 'help' - to help\r\n" +
-                "------------------\r\n" +
-                "|id|name|password|\r\n" +
-                "------------------\r\n" +
-                "|13|Stiven|******|\r\n" +
-                "|14|Eva|++++++|\r\n" +
+                "==================================\r\n" +
+                "|id        |name      |password  |\r\n" +
+                "==================================\r\n" +
+                "|13        |Stiven    |******    |\r\n" +
+                "----------------------------------\r\n" +
+                "|14        |Eva       |++++++    |\r\n" +
+                "----------------------------------\r\n" +
                 "Enter command or 'help' - to help\r\n" +
                 "Good by, see you soon."), getData().trim());
     }

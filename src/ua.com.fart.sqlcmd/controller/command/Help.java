@@ -17,14 +17,22 @@ public class Help implements Command{
 
     @Override
     public void process(String command) {
+        view.write("=========================================================================================");
         view.write("Available commands:");
-        view.write("---------------------");
+        view.write("=========================================================================================");
         view.write("connect: connection to the database, enter: connect,userName,password,dataBaseName");
-        view.write("list: to getting list of tables from base, what you did connect");
-        view.write("clear: to clear all data from table, format query have to be: clear,tableName");//TODO not safe command, will make check before clear
-        view.write("create: to create data in table, format query have to be: create,tableName,nameColumn1,value,nameColumn2,value,nameColumn3,value.......nameColumnN,value");
-        view.write("find: to getting contents from table, format query have to be: find,tableName. tableName it's name of table, what you looking for");
-        view.write("exit: to exit");
-        view.write("---------------------");
+        view.write("-----------------------------------------------------------------------------------------");
+        view.write("list:    getting list of tables from base, what you did connect");
+        view.write("-----------------------------------------------------------------------------------------");
+        view.write("clear:   clear all data from table, format query have to be: clear,tableName");
+        view.write("-----------------------------------------------------------------------------------------");
+        view.write("create:  create data in table, format query have to be: ");
+        view.write("create,tableName,nameColumn1,value1,nameColumn2,value2,nameColumn3,value3...nameColumnN,valueN");
+        view.write("-----------------------------------------------------------------------------------------");
+        view.write("find:    getting contents from table, format query have to be: find,tableName.");
+        view.write("tableName it's name of table, what you are looking for");
+        view.write("-----------------------------------------------------------------------------------------");
+        view.write("exit:    to exit");
+        view.write("=========================================================================================");
     }
 }
