@@ -28,17 +28,11 @@ public class Clear implements Command {
     }
 
     private void confirmClear(String datum) {
-        view.write("You try clear table " + datum);
+        view.write("You try clear table '" + datum + "'");
         view.write("Confirm deleting data (y - confirm, another key - abort)");
         String confirm = view.read();
         if (confirm.equals("y")) {
             manager.clear(datum);
-            String[] tableNames = manager.getTableNames();
-            for (String tableName : tableNames) {
-                if (tableName.equals(datum)) {
-                    view.write("Table '" + datum + "' was cleared");
-                }
-            }
         }else{view.write("operation aborted");}
     }
 }

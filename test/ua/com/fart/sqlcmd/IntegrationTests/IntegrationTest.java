@@ -15,7 +15,7 @@ public class IntegrationTest {
     private static ConfigurableInputStream in;
     private static ByteArrayOutputStream out;
 
-    String getData() {
+    private String getData() {
         try {
             String result = new String(out.toByteArray(), "UTF-8");
             out.reset();
@@ -161,7 +161,7 @@ public class IntegrationTest {
                 "format have to be: connect,userName,password,databaseName\r\n" +
                 "Connect is successful\r\n" +
                 "Enter command or 'help' - to help\r\n" +
-                "You try clear table user\r\n"+
+                "You try clear table 'user'\r\n"+
                 "Confirm deleting data (y - confirm, another key - abort)\r\n"+
                 "Table 'user' was cleared\r\n" +
                 "Enter command or 'help' - to help\r\n" +

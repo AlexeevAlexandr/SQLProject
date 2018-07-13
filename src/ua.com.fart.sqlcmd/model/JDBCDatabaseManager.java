@@ -6,6 +6,7 @@ import java.util.*;
 public class JDBCDatabaseManager implements DatabaseManager {
     private Connection connection;
 
+    //CONNECT
     @Override
     public void connect(String user, String password, String database){
 
@@ -89,6 +90,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     public void clear(String tableName){
         try( Statement stmt = connection.createStatement()){
             stmt.executeUpdate("DELETE FROM public."+tableName);
+            System.out.println("Table '" + tableName + "' was cleared");
         }catch(SQLException e){System.out.println("Table '" + tableName + "' didn't found");}
     }
 

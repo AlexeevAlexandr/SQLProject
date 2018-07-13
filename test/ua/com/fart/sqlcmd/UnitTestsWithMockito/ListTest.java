@@ -36,6 +36,5 @@ public class ListTest {
         assertFalse(canProcess);
     }
 
-
 }
 
