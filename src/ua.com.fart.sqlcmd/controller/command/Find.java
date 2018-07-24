@@ -4,6 +4,8 @@ import ua.com.fart.sqlcmd.model.DataSet;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.view.View;
 
+import java.util.List;
+
 public class Find implements Command {
 
     private View view;
@@ -31,7 +33,7 @@ public class Find implements Command {
     }
 
     private void printRow(DataSet row) {
-        Object [] result = row.getValues();
+        List<Object> result = row.getValues();
         StringBuilder rowString = new StringBuilder("|");
         for (Object value : result) {
             rowString.append(String.format("%-10s",value)).append("|");

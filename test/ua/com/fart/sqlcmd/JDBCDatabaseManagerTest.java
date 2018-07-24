@@ -45,8 +45,8 @@ public class JDBCDatabaseManagerTest {
 
             DataSet[] users = manager.getTableData("user");
             DataSet user = users [0];
-            assertEquals("[id, name, password]", Arrays.toString(user.getNames()));
-            assertEquals("[1, Stiven, pass]", Arrays.toString(user.getValues()));
+            assertEquals("[id, name, password]", user.getNames().toString());
+            assertEquals("[1, Stiven, pass]", user.getValues().toString());
 
         }
 
@@ -70,8 +70,8 @@ public class JDBCDatabaseManagerTest {
         assertEquals(1, users.length);
 
         DataSet user = users[0];
-        assertEquals("[id, name, password]", Arrays.toString(user.getNames()));
-        assertEquals("[13, Pup, pass2]", Arrays.toString(user.getValues()));
+        assertEquals("[id, name, password]", user.getNames().toString());
+        assertEquals("[13, Pup, pass2]", user.getValues().toString());
     }
 
         @Test

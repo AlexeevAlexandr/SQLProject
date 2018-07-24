@@ -1,58 +1,26 @@
 package ua.com.fart.sqlcmd.model;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class DataSet {
-    static class Data{
-        String name;
-        Object value;
 
-        String getName() {
-            return name;
-        }
-
-        Object getValue() {
-            return value;
-        }
-
-        Data(String name, Object value) {
-            this.name = name;
-            this.value = value;
-        }
-    }
-
-    private Data [] data = new Data[100]; //TODO remove magic number 100
-    private int freeIndex = 0;
+    private Map<String, Object> data = new LinkedHashMap<>();
 
     public void put(String name, Object value) {
-        for (int index = 0; index < freeIndex; index++) {
-            if(data[index].getName().equals(name)){
-                data[index].value = value;
-                return;
-            }
-        }
-        data[freeIndex++] = new Data (name, value);
+        data.put(name, value);
     }
 
-    public Object [] getValues(){
-        Object [] result = new Object[freeIndex];
-        for (int i = 0; i < freeIndex; i++) {
-            result [i] = data[i].getValue();
-        }
-        return result;
+    public List<Object> getValues(){
+        return new ArrayList<>(data.values());
     }
 
-    public String [] getNames(){
-        String [] result = new String[freeIndex];
-        for (int i = 0; i < freeIndex; i++) {
-            result [i] = data[i].getName();
-        }
-        return result;
+    public Set<String> getNames(){
+        return data.keySet();
     }
 
     @Override
     public String toString() {
-        return "{names: " + Arrays.toString(getNames()) + ", " +
-               "values: " + Arrays.toString(getValues()) + "}";
+        return "{names: " + getNames().toString() + ", " +
+               "values: " + getValues().toString() + "}";
     }
 }
