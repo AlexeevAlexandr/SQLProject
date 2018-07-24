@@ -50,22 +50,6 @@ public class DataSet {
         return result;
     }
 
-    public Object get(String name) {
-        for (int i = 0; i < freeIndex; i++) {
-            if (data[i].getName().equals(name)) {
-                return data[i].getValue();
-            }
-        }
-        return null;
-    }
-
-    public void updateFrom(DataSet newValue) {
-        for (int index = 0; index < newValue.freeIndex; index++) {
-            Data data = newValue.data[index];
-            this.put(data.name, data.value);
-        }
-    }
-
     @Override
     public String toString() {
         return "{names: " + Arrays.toString(getNames()) + ", " +

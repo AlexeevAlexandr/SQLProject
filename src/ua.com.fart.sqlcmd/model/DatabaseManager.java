@@ -1,16 +1,14 @@
 package ua.com.fart.sqlcmd.model;
 
-import java.sql.Connection;
+import java.util.Set;
 
 public interface DatabaseManager {
 
     void connect(String user, String password, String database);
 
-    Connection getConnection();
-
     DataSet[] getTableData(String tableName);
 
-    String[] getTableNames();
+    Set<String> getTableNames();
 
     int getSize(String tableName);
 

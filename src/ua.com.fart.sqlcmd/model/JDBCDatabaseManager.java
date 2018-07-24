@@ -27,10 +27,6 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     }
 
-    @Override
-    public Connection getConnection() {
-        return connection;
-    }
     //SELECT-B
     @Override
     public DataSet[] getTableData(String tableName) {
@@ -56,18 +52,16 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     //SELECT-A
     @Override
-    public String[] getTableNames(){
+    public Set<String> getTableNames(){
+        Set <String> tables = new HashSet<>();
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public'"))
         {
-            String [] tables = new String[100];
-            int index = 0;
-            while(rs.next()) { tables [index++] = rs.getString("table_name"); }
-            tables = Arrays.copyOf(tables, index, String [].class);
+            while(rs.next()) { tables.add(rs.getString("table_name")); }
             return tables;
         }catch (SQLException e) {
             e.printStackTrace();
-            return new String[0];
+            return tables;
         }
     }
 

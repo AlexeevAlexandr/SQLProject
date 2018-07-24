@@ -5,24 +5,25 @@ import org.junit.Test;
 import ua.com.fart.sqlcmd.model.DataSet;
 import ua.com.fart.sqlcmd.model.DatabaseManager;
 import ua.com.fart.sqlcmd.model.JDBCDatabaseManager;
-import java.sql.SQLException;
+
 import java.util.Arrays;
+import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class JDBCDatabaseManagerTest {
-    DatabaseManager manager;
+    private DatabaseManager manager;
 
         @Before
-        public void setup () throws SQLException {
+        public void setup () {
             manager = new JDBCDatabaseManager();
             manager.connect("root", "111111", "postgres");
         }
 
         @Test
         public void testGetAllTableNames(){
-            String [] tableNames = manager.getTableNames();
-            assertEquals("[user, user2]", Arrays.toString(tableNames));
+            Set<String> tableNames = manager.getTableNames();
+            assertEquals("[user2, user]", tableNames.toString());
         }
 
         @Test
