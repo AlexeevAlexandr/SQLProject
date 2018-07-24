@@ -24,7 +24,7 @@ public class List implements Command {
     public void process(String command) {
         Set<String> tableNames = manager.getTableNames();
         String message = String.valueOf(tableNames);
-        view.write("");
+        view.write("List of tables:");
         view.write(message);
         view.write("");
     }

@@ -125,7 +125,7 @@ public class IntegrationTest {
                 "format have to be: connect,userName,password,databaseName\r\n" +
                 "Connect is successful\r\n" +
                 "Enter command or 'help' - to help\r\n" +
-                "\r\n" +
+                "List of tables:\r\n" +
                 "[user2, user]\r\n"+
                 "\r\n" +
                 "Enter command or 'help' - to help"),getData().trim());
